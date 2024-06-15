@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: ex_food_truck
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  app:
+    build: .
+    environment:
+      DATABASE_URL: ecto://postgres:postgres@db/ex_food_truck
+      SECRET_KEY_BASE: a_very_secret_key
+      PORT: 4000
+    depends_on:
+      - db
+    ports:
+      - "4000:4000"
+    volumes:
+      - .:/app
+    command: sh -c "mix ecto.migrate && mix phx.server"
+
+volumes:
+  postgres_data:
