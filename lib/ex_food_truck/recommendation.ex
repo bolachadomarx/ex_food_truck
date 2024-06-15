@@ -12,9 +12,23 @@ defmodule ExFoodTruck.Recommendation do
     with food_items <- FoodItems.list_food_items_by_name(food_items),
          recommendations <-
            FoodTrucksFoodItems.list_by_food_items_ids(food_items_ids(food_items)) do
-      Enum.map(recommendations, &%{food_truck: &1.food_truck, food_item: &1.food_item.name})
+      handle_recommendations(recommendations)
     end
   end
 
   defp food_items_ids(food_items), do: Enum.map(food_items, & &1.id)
+
+  defp handle_recommendations(recommendations) do
+    recommendations
+    |> Enum.group_by(& &1.food_truck)
+    |> Enum.map(fn {food_truck, food_truck_food_items} ->
+      food_items = handle_food_items(food_truck_food_items)
+
+      %{food_truck: food_truck, food_items: food_items}
+    end)
+  end
+
+  defp handle_food_items(food_truck_food_items) do
+    Enum.map(food_truck_food_items, & &1.food_item.name)
+  end
 end

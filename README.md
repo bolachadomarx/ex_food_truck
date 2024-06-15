@@ -71,7 +71,7 @@ JSON
 ```json
 [
   {
-    "food_item": "string",
+    "food_items": ["string", "string"],
     "food_truck": {
       "id": "string",
       "name": "string",
@@ -83,7 +83,7 @@ JSON
 ]
 ```
 
-- **food_item** (string) - The recommended food item.
+- **food_items** (array) - The recommended food items.
 - **food_truck** (object) - Information about the recommended food truck.
 
   - **id** (string) - The unique identifier of the food truck.
