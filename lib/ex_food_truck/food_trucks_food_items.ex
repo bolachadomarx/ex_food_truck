@@ -102,7 +102,7 @@ defmodule ExFoodTruck.FoodTrucksFoodItems do
     FoodTruckFoodItem.changeset(food_truck_food_item, attrs)
   end
 
-  def list_food_truck_food_items(food_items_ids) do
+  def list_by_food_items_ids(food_items_ids) do
     FoodTruckFoodItem
     |> from()
     |> where([ftfi], ftfi.food_item_id in ^food_items_ids)

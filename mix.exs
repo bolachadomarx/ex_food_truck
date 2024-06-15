@@ -45,7 +45,8 @@ defmodule ExFoodTruck.MixProject do
       {:dns_cluster, "~> 0.1.1"},
       {:bandit, "~> 1.2"},
       {:tesla, "~> 1.4"},
-      {:hackney, "~> 1.17"}
+      {:hackney, "~> 1.17"},
+      {:mimic, "~> 1.7", only: :test}
     ]
   end
 

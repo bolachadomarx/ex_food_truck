@@ -15,4 +15,10 @@ defmodule ExFoodTruckWeb.RecommendationController do
         |> json(recommendations)
     end
   end
+
+  def index(conn, _params) do
+    conn
+    |> put_status(:bad_request)
+    |> json(%{message: "food_items is required on the query params"})
+  end
 end

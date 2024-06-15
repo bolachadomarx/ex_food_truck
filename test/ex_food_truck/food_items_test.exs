@@ -56,10 +56,10 @@ defmodule ExFoodTruck.FoodItemsTest do
       assert %Ecto.Changeset{} = FoodItems.change_food_item(food_item)
     end
 
-    test "list_food_items_by_name/ should return all food item with the given name" do
-      food_item_fixture()
+    test "list_food_items_by_name/1 should return all food item that matches with the given names" do
+      %{id: id} = food_item_fixture()
 
-      assert [food_item] = FoodItems.list_food_items_by_name(["some name"])
+      assert [%{id: ^id}] = FoodItems.list_food_items_by_name(["some", "name"])
     end
   end
 end

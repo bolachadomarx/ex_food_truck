@@ -14,6 +14,8 @@ defmodule Providers.SfData.Response do
     {:ok, food_trucks}
   end
 
+  def parse(response), do: response
+
   defp parse_food_items(nil), do: []
 
   defp parse_food_items(food_items) do
