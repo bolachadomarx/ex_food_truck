@@ -102,6 +102,15 @@ defmodule ExFoodTruck.FoodItems do
     FoodItem.changeset(food_item, attrs)
   end
 
+  @doc """
+  Returns a list of FoodItems filtered by the food_item name.
+
+  ## Examples
+
+      iex> list_food_items_by_name(food_items)
+      [%FoodItem{}, %FoodItem{}, %FoodItem{}]
+
+  """
   def list_food_items_by_name(food_items) do
     food_items_to_search = Enum.map(food_items, &"%#{&1}%")
 

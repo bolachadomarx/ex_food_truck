@@ -92,26 +92,32 @@ JSON
   - **location** (string) - The location of the food truck.
   - **facility_type** (string) - The type of facility provided by the food truck.
 
+### Import to Postman
+
+```curl
+curl --location --globoff 'localhost:4000/api/recommendation?food_items[]=eggs&food_items[]=salads'
+```
+
 ## About the project
 
 This project was designed as a simple way to represent a recommendation system for Food Trucks in San Francisco, based on the types of foods they offer. The service provides an endpoint that can receive different types of foods through query parameters, returning all the Food Trucks in San Francisco that offer any dish with the foods sent via parameters.
 
-### Organização das informações
+### Data relation
 
 The information to ensure the service's functionality was organized to optimize the search for Food Trucks based on the types of foods they offer. Three relationships were necessary to store the information:
 ![Schemas information](assets/db.png)
 
-### Design do Serviço
+### Service Design
 
 The application is simple and contains only a few modules to organize database information, communicate with the data provider, and a service to import this data, along with tests and project configuration files. The contexts were organized as follows:
 ![Application Contexts](assets/contexts.png)
 
-#### Endpoint de recomendação
+#### Recommendation Endpoint
 
 The recommendation endpoint uses the data organized in the database to search, through the provided food names, for which Food Truck recommendations it can give. The system modules communicate as follows:
 ![Recommendation Route](assets/endpoint.png)
 
-#### Importação das informações dos Food Trucks
+#### Importing Food Truck Information
 
 The information about San Francisco's Food Trucks is made available through an open API, accessible to anyone. To bring this data into the service, a module was created to fetch and insert this information into the ExFoodTruck database. The information is retrieved via a GET request to San Francisco's open API, processed to fit the application's schemas, and finally inserted, respecting the relationships between the tables in the database. The communication between contexts works as follows:
 ![Import to DB service](assets/service.png)
@@ -128,6 +134,9 @@ Several factors related to the way data is made available influenced my decision
 
 - **Even though the data is available in CSV format, the San Francisco data platform provides the same information through an API.**
   This means we don't need to work with file import to have this information in our database.
+
+- **Docker is fast to deploy**
+  Docker was chosen because it is the simplest way to deploy a solution to production. Since a database is needed, using Docker eliminates the need for the user to install PostgreSQL, Elixir, and Erlang.
 
 ### What more could be done?
 

@@ -102,6 +102,15 @@ defmodule ExFoodTruck.FoodTrucksFoodItems do
     FoodTruckFoodItem.changeset(food_truck_food_item, attrs)
   end
 
+  @doc """
+  Returns a list of food_truck_food_item with preloaded food_item and food_truck using food_item_ids.
+
+  ## Examples
+
+      iex> list_by_food_items_ids(food_items_ids)
+      [%FoodTruckFoodItem{}, %FoodTruckFoodItem{}, %FoodTruckFoodItem{}]
+
+  """
   def list_by_food_items_ids(food_items_ids) do
     FoodTruckFoodItem
     |> from()
